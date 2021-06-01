@@ -6,3 +6,4 @@ Daily learning
 2. [事件循环](doc/javascript/basic/事件循环.md)
 3. [防抖节流](doc/javascript/basic/防抖节流.md)
 4. [闭包](doc/javascript/basic/闭包.md)
+5. [typeof操作符](doc/javascript/basic/typeof操作符.md)
