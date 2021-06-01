@@ -7,3 +7,7 @@ Daily learning
 3. [防抖节流](doc/javascript/basic/防抖节流.md)
 4. [闭包](doc/javascript/basic/闭包.md)
 5. [typeof操作符](doc/javascript/basic/typeof操作符.md)
+
+### CSS
+1. [单行文本超宽省略](doc/css/basic/单行文本超宽省略.md)
+
