@@ -1,2 +1,8 @@
-# LY_Q
+# ly_q
 Daily learning
+
+### javascript
+1. [var、let、const的区别](doc/javascript/basic/var、let、const的区别.md)
+2. [事件循环](doc/javascript/basic/事件循环.md)
+3. [防抖节流](doc/javascript/basic/防抖节流.md)
+4. [闭包](doc/javascript/basic/闭包.md)
