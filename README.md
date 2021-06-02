@@ -11,3 +11,4 @@ Daily learning
 
 ### CSS
 1. [单行文本超宽省略](doc/css/basic/单行文本超宽省略.md)
+2. [水平居中元素](doc/css/basic/水平居中元素.md)
