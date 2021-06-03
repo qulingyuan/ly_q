@@ -36,7 +36,7 @@
             let content = this;
             let args = arguments;
             let now = new Date();
-            if(now-pre>delay){
+            if(now - pre > delay){
                 func.apply(content,args);
                 pre = now;
             }
