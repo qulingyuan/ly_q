@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    function coloring(){
+        let r = Math.floor(Math.random()*255);
+        let g = Math.floor(Math.random()*255);
+        let b = Math.floor(Math.random()*255);
+        document.body.style.background=`rgb(${r},${g},${b})`;
+    }
+    function throttle1(func,delay){
+        let timer;
+        return function(){
+            let content = this;
+            let args = arguments;
+            if(timer){
+                return;
+            }
+            timer = setTimeout(() => {
+                func.apply(content,args);
+                timer = null;
+            }, delay);
+            
+        }
+    }
+    function throttle2(func,delay){
+        let pre = 0;
+        return function(){
+            let content = this;
+            let args = arguments;
+            let now = new Date();
+            if(now-pre>delay){
+                func.apply(content,args);
+                pre = now;
+            }
+        }
+    }
+    window.addEventListener("resize",throttle1(coloring,3000));
+</script>
+</html>
