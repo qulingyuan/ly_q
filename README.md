@@ -16,4 +16,5 @@ Daily learning
 
 ### Other
 
-1.[常用网站](doc/other/常用网站.md)
+1. [常用网站](doc/other/常用网站.md)
+
