@@ -12,4 +12,4 @@ Daily learning
 ### CSS
 1. [单行文本超宽省略](doc/css/basic/单行文本超宽省略.md)
 2. [水平居中元素](doc/css/basic/水平居中元素.md)
-3. [执行上下文与作用域链](doc/css/basic/执行上下文与作用域链.md)
+3. [执行上下文与作用域链](doc/javascript/basic/执行上下文与作用域链.md)
