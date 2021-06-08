@@ -24,5 +24,5 @@ Daily learning
 
 ### 书籍
 
-1. [HTML5与CSS3基础教程（第8版）](doc/books/HTML5与CSS3基础教程（第8版）)
-2. [JavaScript高级程序设计（第4版）](doc/books/JavaScript高级程序设计（第4版）)
+1. [HTML5与CSS3基础教程（第8版）](doc/books/HTML5与CSS3基础教程（第8版）.pdf)
+2. [JavaScript高级程序设计（第4版）](doc/books/JavaScript高级程序设计（第4版）.pdf)
