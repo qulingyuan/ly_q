@@ -8,6 +8,7 @@ Daily learning
 4. [闭包](doc/javascript/basic/闭包.md)
 5. [typeof操作符](doc/javascript/basic/typeof操作符.md)
 6. [交换变量](doc/javascript/basic/交换变量.md)
+7. [赋值、浅复制、深复制](doc/javascript/basic/赋值、浅拷贝、深拷贝.md)
 
 ### CSS
 1. [单行文本超宽省略](doc/css/basic/单行文本超宽省略.md)
