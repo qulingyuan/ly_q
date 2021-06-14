@@ -70,7 +70,7 @@ result = stop - start;
 
 **`toString()`** 返回带时区信息的日期和时间，而且以24小时制(0~23)表示。（因浏览器而异）
 
-![toLocaleString&toString](https://github.com/qulingyuan/ly_q/blob/3fe158726e8ce7eebe36d3218d86117fd4049ab7/doc/javascript/media/date_method.png)
+![toLocaleString&toString](https://github.com/qulingyuan/ly_q/blob/6f59332bdcfbf0b44e9d601af4bf1e0e9d75298f/doc/media/date_method.png)
 
 **`valueOf()`** 不返回字符串，而是返回日期的毫秒表示。因此，操作符(>或<)可以直接使用它返回的值。
 
