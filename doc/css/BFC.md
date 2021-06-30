@@ -63,7 +63,7 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
    
    效果：
    
-   
+   ![BFC_1](https://github.com/qulingyuan/ly_q/blob/16f73e970e52412b8544e64f88a8752ef86cef3f/doc/media/BFC_1.png)
    
    结果分析：
    
@@ -103,7 +103,7 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
    
    这时，两个div的边距就变成了我们期望的300px。
    
-   
+   ![BFC_2](https://github.com/qulingyuan/ly_q/blob/16f73e970e52412b8544e64f88a8752ef86cef3f/doc/media/BFC_2.png)
 
 2. #### BFC可以包含浮动的元素（清除浮动）
 
@@ -115,7 +115,7 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
 </div>
 ```
 
-![BFC_3]()
+![BFC_3](https://github.com/qulingyuan/ly_q/blob/16f73e970e52412b8544e64f88a8752ef86cef3f/doc/media/BFC_3.png)
 
 由于容器内元素浮动，脱离了文档流，所以容器只剩下 2px 的边距高度。如果使触发容器的 BFC，那么容器将会包裹着浮动元素。
 
@@ -125,7 +125,7 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
 </div>
 ```
 
-![BFC_4]
+![BFC_4](https://github.com/qulingyuan/ly_q/blob/16f73e970e52412b8544e64f88a8752ef86cef3f/doc/media/BFC_4.png)
 
 3. #### 阻止元素被浮动元素覆盖
 
@@ -137,7 +137,7 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
 也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;</div>
 ```
 
-![BFC_5]
+![BFC_5](https://github.com/qulingyuan/ly_q/blob/16f73e970e52412b8544e64f88a8752ef86cef3f/doc/media/BFC_5.png)
 
 这时候其实第二个元素有部分被浮动元素所覆盖，(但是文本信息不会被浮动元素所覆盖) 如果想避免元素被覆盖，可触第二个元素的 BFC 特性，在第二个元素中加入`overflow:hidden`，就会变成：
 
@@ -147,6 +147,6 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
 也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;</div>
 ```
 
-![BFC_6]
+![BFC_6](https://github.com/qulingyuan/ly_q/blob/16f73e970e52412b8544e64f88a8752ef86cef3f/doc/media/BFC_6.png)
 
 这个方法可以用来实现两列自适应布局，效果不错，这时候左边的宽度固定，右边的内容自适应宽度(去掉上面右边内容的宽度)。
