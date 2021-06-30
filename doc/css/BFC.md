@@ -34,7 +34,7 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
 
 ### BFC的特性及应用
 
-1. 同一个BFC下外边距折叠
+1. #### 同一个BFC下外边距折叠
 
    margin塌陷问题：在标准文档流中，块级标签之间竖直方向的margin会以大的为准，这就是margin的塌陷现象。可以用`overflow:hidden`产生BFC来解决。
    
@@ -105,5 +105,48 @@ BFC即Block Formatting Contents（顶级格式化上下文），它属于上述�
    
    
 
-2. BFC可以包含浮动的元素（清除浮动）
+2. #### BFC可以包含浮动的元素（清除浮动）
 
+高度塌陷问题，在通常情况下父元素的高度会被子元素撑开，而浮动的元素会脱离普通文档流，在这里因为其子元素为浮动元素所以父元素发生了高度坍塌，上下边界重合，这时就可以用BFC来清除浮动了。
+
+```html
+<div style="border: 1px solid #000;">
+    <div style="width: 100px;height: 100px;background: lightgreen;float: left;"></div>
+</div>
+```
+
+![BFC_3]()
+
+由于容器内元素浮动，脱离了文档流，所以容器只剩下 2px 的边距高度。如果使触发容器的 BFC，那么容器将会包裹着浮动元素。
+
+```html
+<div style="border: 1px solid #000;overflow: hidden">
+    <div style="width: 100px;height: 100px;background: lightgreen;float: left;"></div>
+</div>
+```
+
+![BFC_4]
+
+3. #### 阻止元素被浮动元素覆盖
+
+由于左侧块级元素发生了浮动，所以和右侧未发生浮动的块级元素不在同一层内，所以会发生div遮挡问题。
+
+```html
+<div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div>
+<div style="width: 200px; height: 200px;background: #eee">我是一个没有设置浮动, 
+也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;</div>
+```
+
+![BFC_5]
+
+这时候其实第二个元素有部分被浮动元素所覆盖，(但是文本信息不会被浮动元素所覆盖) 如果想避免元素被覆盖，可触第二个元素的 BFC 特性，在第二个元素中加入`overflow:hidden`，就会变成：
+
+```html
+<div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div>
+<div style="width: 200px; height: 200px;background: #eee;overflow:hidden">我是一个没有设置浮动, 
+也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;</div>
+```
+
+![BFC_6]
+
+这个方法可以用来实现两列自适应布局，效果不错，这时候左边的宽度固定，右边的内容自适应宽度(去掉上面右边内容的宽度)。
