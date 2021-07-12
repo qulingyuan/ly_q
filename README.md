@@ -3,8 +3,9 @@ Daily learning
 
 ### javascript
 
-- [ ] [var、let、const的区别](doc/javascript/var、let、const的区别.md)
-- [ ] [事件循环](doc/javascript/事件循环.md)
+- [x] [由[] == ![]引发的思考](doc/javascript/由[]==![]引发的思考.md)
+- [x] [var、let、const的区别](doc/javascript/var、let、const的区别.md)
+- [x] [事件循环](doc/javascript/事件循环.md)
 - [ ] [防抖节流](doc/javascript/防抖节流.md)
 - [ ] [闭包](doc/javascript/闭包.md)
 - [ ] [typeof操作符](doc/javascript/typeof操作符.md)
@@ -20,16 +21,13 @@ Daily learning
 - [ ] 原型链以及继承
 
 ### CSS
-1. [单行文本超宽省略](doc/css/basic/单行文本超宽省略.md)
-2. [水平居中元素](doc/css/basic/水平居中元素.md)
-3. flex布局
-4. 响应式布局
-5. BFC
-6. 伪类和伪元素
-
-### HTML
-
-1. BFC
+- [ ] [单行文本超宽省略](doc/css/单行文本超宽省略.md)
+- [ ] [水平居中元素](doc/css/basic/水平居中元素.md)
+- [ ] flex
+- [ ] 响应式布局
+- [ ] BFC
+- [ ] 伪类和伪元素
+- [ ] 元素选择器
 
 ### React
 
@@ -49,13 +47,17 @@ Daily learning
 1. 浏览器记住密码
 2. nginx优化
 3. 页面抖动
+4. git版本回退reset、revert
+5. 
 
 ### 网络
 
-1. [浏览器输入url到页面渲染的整个过程]
-2. http/https 区别
-3. http1.x 和 http2.0 的区别
-4. dns 服务器是什么，如何查询 dns 的
+- [ ] 跨域
+- [ ] [浏览器输入url到页面渲染的整个过程]
+- [ ] http/https 区别
+- [ ] http1.x 和 http2.0 的区别
+- [ ] dns 服务器是什么，如何查询 dns 的
+- [ ] http的缓存策略
 
 ### 书籍
 
