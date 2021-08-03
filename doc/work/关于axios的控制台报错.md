@@ -14,7 +14,7 @@
 
 在useEffect里，一共有两个与请求有关的数据，一个是直接发送的axios请求获取到的数据，另一个是从上层组件的axios请求返回的数据往下层组件传回来的结果。二者都会导致控制台报错。
 
-针对第一个问题，直接利用[axios cancelToken](https://github.com/axios/axios#cancellation)取消请求即可，官方给了两种处理方式，一是使用CancelToken的静态方法，另一种是自己实例化一个CancelToken对象，二者道理都是一样的，只不过第二种可以自定义注入的参数；第二个问题，利用一个变量控制setState，使其不在组件卸载时执行。这里我们的变量使用`useRef`来定义，
+针对第一个问题，直接利用[axios cancelToken](https://github.com/axios/axios#cancellation)取消请求即可，官方给了两种处理方式，一是使用CancelToken的静态方法，另一种是自己实例化一个CancelToken对象，二者道理都是一样的，只不过第二种可以自定义注入的参数；第二个问题，利用一个变量控制setState，使其不在组件卸载时执行。因为`useRef` 会在每次渲染时返回同一个 ref 对象，并且变更`.current`时并不会引发组件重新渲染，所以`useRef`非常适合作为控制组件setState是否执行的变量。
 
 ![axios解决方案](https://github.com/qulingyuan/ly_q/blob/fcc5fc1374f0bb0c6e5c7cd74b1572a3014ae05f/doc/media/project_axios_error_2.png)
 
