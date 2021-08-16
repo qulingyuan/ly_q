@@ -7,18 +7,22 @@ Daily learning
 - [x] [var、let、const的区别](doc/javascript/var、let、const的区别.md)
 - [x] [事件循环](doc/javascript/事件循环.md)
 - [ ] [防抖节流](doc/javascript/防抖节流.md)
-- [ ] [闭包](doc/javascript/闭包.md)
-- [ ] [typeof操作符](doc/javascript/typeof操作符.md)
-- [ ] [交换变量](doc/javascript/交换变量.md)
-- [ ] [赋值、浅拷贝、深拷贝](doc/javascript/赋值、浅拷贝、深拷贝.md)
-- [ ] [执行上下文与作用域链](doc/javascript/执行上下文与作用域链.md)
-- [ ] [Date](doc/javascript/Date.md)
+- [x] [闭包](doc/javascript/闭包.md)
+- [x] [typeof操作符](doc/javascript/typeof操作符.md)
+- [x] [交换变量](doc/javascript/交换变量.md)
+- [x] [赋值、浅拷贝、深拷贝](doc/javascript/赋值、浅拷贝、深拷贝.md)
+- [x] [执行上下文与作用域链](doc/javascript/执行上下文与作用域链.md)
+- [x] [Date](doc/javascript/Date.md)
+- [x] [理解js中的this](doc/javascript/js中this的理解.md)
+- [x] [js中的类型转换](doc/javascript/js中的类型转换.md)
+- [x] [继承-原型链](doc/javascript/继承-原型链.md)
 - [ ] 事件捕获和事件冒泡
 - [ ] 图片懒加载
 - [ ] 上传图片的压缩
 - [ ] Javascript异步
 - [ ] service worker 使用
-- [ ] 原型链以及继承
+- [ ] 前端优化的手段
+- [ ] call、apply、bind
 
 ### CSS
 - [ ] [单行文本超宽省略](doc/css/单行文本超宽省略.md)
