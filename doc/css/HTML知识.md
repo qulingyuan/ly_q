@@ -5,8 +5,8 @@
 
 ### 块状元素&内联元素
 
-- display:block/table;有`div h1 h2 table ul ol p`等
-- display:inline/inline-block;有`span img input button`等
+- display:block/table;独占一行，有`div h1 h2 table ul ol p`等
+- display:inline/inline-block;不会独占一行，会依次排开，有`span img input button`等
 
 
 

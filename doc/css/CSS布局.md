@@ -142,3 +142,94 @@ flex实现一个三点的色子
 - flex-wrap
 - align-self
 
+
+
+### absolute 和 relative 定位
+
+- relative 依据自身定位
+- absolute 依据最近一层的**定位元素**定位
+
+#### 定位元素
+
+- absolute relative fixed
+- body
+
+
+
+### 居中对齐的实现方式
+
+#### 水平居中
+
+inline元素：text-align:center
+
+block元素：margin:auto
+
+absolute 元素：left:50% + margin-left:元素宽度一半的负值
+
+
+
+
+
+### 垂直居中
+
+- inline元素：inline-height 的值等于 height 值
+- absolute 元素：
+  - top:50% + margin-top:元素高度一半的负值（需要知道子元素的尺寸）
+  - transform(-50%,-50%)  -----transform为CSS3属性，兼容性要注意
+  - top、left、bottom、right 均为 0 + margin:auto   -----无兼容性问题
+
+
+
+### CSS-图文样式
+
+### line-height 如何继承
+
+- 具体数值，如 30px，则继承该值
+- 比例，如 2/1.5，则继承该比例
+- 百分比，如 200%，则继承计算出来的值
+
+
+
+
+
+### CSS-响应式布局
+
+### rem 是什么
+
+rem是一个长度单位
+
+- px，绝对长度单位，最常用
+- em，相对长度单位，相对于父元素，不常用
+- rem，相对长度单位，相对于根元素，常用于响应式布局
+
+
+
+
+
+### 响应式布局的常见方案？
+
+1. media-query，根据不同的屏幕宽度设置根元素font-size
+2. rem，基于根元素的相对定位
+
+
+
+rem的弊端：“阶梯”性
+
+
+
+### 网页视口尺寸
+
+- window.screen.height //屏幕高度
+- window.innerHeight //网页视口高度
+- document.body.clientHeight //body高度
+
+
+
+### vw/vh
+
+- vh 网页视口高度 (window.innerHeight) 的 1/100
+- vw 网页视口宽度 (window.innerWidth) 的1/100
+- vmax 取两者最大值；vmin取两者最小值
+
+
+
