@@ -1,0 +1,3 @@
+
+React中，将props传递给state时，当props为引用值时，使用直接赋值的方式传递给state，state的修改会引发props的更改。为了避免这种情况，酌情使用浅复制或者深复制即可。
+

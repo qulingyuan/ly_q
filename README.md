@@ -37,6 +37,14 @@ Daily learning
 
 1. [useEffect](doc/react/useEffect.md)
 
+### 数据结构与算法
+
+- [x] 栈
+- [x] 队列
+- [x] 链表
+- [x] 集合
+- [ ] 字典
+
 ### 浏览器
 
 1. [进程VS线程](doc/javascript/basic/进程VS线程.md)

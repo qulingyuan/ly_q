@@ -2,7 +2,7 @@ this有五种使用场景，针对不同场景，this的指向略有不同
 
 ### 作为普通函数
 
-指向window
+在正常模式下指向 window。在严格模式下为 undefined。
 
 ```javascript
 //作为普通函数被调用
@@ -10,6 +10,16 @@ function fn(){
     console.log(this);
 }
 fn(); // window
+```
+
+```javascript
+"use strict"
+//严格模式
+console.log(this);//window
+function fn(){
+    console.log(this);
+}
+fn(); // undefined
 ```
 
 

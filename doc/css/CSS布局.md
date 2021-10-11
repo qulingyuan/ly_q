@@ -48,8 +48,9 @@
 
 ### margin纵向折叠问题
 
-- 相邻元素的 margin-top 和 margin-bottom 会发生重叠
+- 相邻元素的 margin-top 和 margin-bottom 会发生重叠，折叠后的值以最大边距为准。
 - 空白内容的 <p></p>也会重叠
+- 行内框、浮动框或绝对定位框之间的外边距不会叠加。
 
 ```html
     <style>
@@ -162,7 +163,7 @@ flex实现一个三点的色子
 
 inline元素：text-align:center
 
-block元素：margin:auto
+block元素：margin:0 auto
 
 absolute 元素：left:50% + margin-left:元素宽度一半的负值
 
