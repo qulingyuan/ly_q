@@ -6,7 +6,7 @@ Daily learning
 - [x] [由[] == ![]引发的思考](doc/javascript/由[]==![]引发的思考.md)
 - [x] [var、let、const的区别](doc/javascript/var、let、const的区别.md)
 - [x] [事件循环](doc/javascript/事件循环.md)
-- [ ] [防抖节流](doc/javascript/防抖节流.md)
+- [x] [防抖节流](doc/javascript/防抖节流.md)
 - [x] [闭包](doc/javascript/闭包.md)
 - [x] [typeof操作符](doc/javascript/typeof操作符.md)
 - [x] [交换变量](doc/javascript/交换变量.md)
