@@ -1,4 +1,4 @@
-## 盒模型
+### 盒模型
 
 盒模型由四个部分组成：
 
@@ -16,7 +16,7 @@
 
 使用`box-sizing`来指定`border-box`或`content-box`。
 
-## 内联元素vs块状元素
+### 内联元素vs块状元素
 
 浏览器中，元素有两种：
 
@@ -25,7 +25,7 @@
 - 块级元素(`display:block`)：独占一行，未设置宽度时，宽度为父容器的100%。宽高、内外边距设置有效。如：`div、p、h1、ul`。
 - 内联块级元素(`display:inline-block`)：宽高、内外边距设置有效，可位于块级元素或内联元素内，可容纳块级元素。
 
-## 文档流和元素定位
+### 文档流和元素定位
 
 正常的文档流在 HTML 里面为从上到下，从左到右的排版布局。
 `position`可以调整元素定位。
@@ -38,13 +38,13 @@
 
 `fixed`：与`absolute`定位相同，但相对浏览器窗口进行绝对定位。
 
-## 元素堆叠 z-index
+### 元素堆叠 z-index
 
 - z-index 只在定位元素(定义了`position`属性，且属性值为非`static`的元素)上有效果。
 - 堆叠顺序由**层叠上下文**、**层叠等级**共同决定，层叠上下文可简单理解为父元素的层叠顺序。父元素`z-index`大的元素一定显示在前面，父元素`z-index`相同时，才会按照元素本身的`z-index`比较。
 - 同级元素，不设置`z-index`或`z-index`相等时，后面的元素会叠在前面的元素上方；`z-index`不同时，`z-index`大的元素会显示在前面。
 
-## Flex 布局
+### Flex 布局
 
 Flex布局包括Flex容器和Flex元素：
 
@@ -69,9 +69,9 @@ Flex元素属性：
 - `flex`：`flex-grow`, `flex-shrink` 和 `flex-basis`的简写，默认值为`0 1 auto`。
 - `align-self`：允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性，默认为auto。
 
-## 居中对齐
+### 居中对齐
 
-### 水平居中
+#### 水平居中
 
 - 内联元素：`text-align:center`
 
@@ -87,7 +87,7 @@ Flex元素属性：
 
   `display: flex` + `justify-content:center`。
 
-### 垂直居中
+#### 垂直居中
 
 - 内联元素：单行文本，子元素的line-height等于父元素的height。
 
@@ -99,7 +99,7 @@ Flex元素属性：
 
   `display: flex` + `align-item:center`。
 
-### 水平垂直居中
+#### 水平垂直居中
 
 `absolute` + `top:50%` + `left:50%` + `margin-top:元素高度负值的一半` + `margin-left:元素宽度负值的一半`。
 
