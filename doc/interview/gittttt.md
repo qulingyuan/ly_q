@@ -146,5 +146,49 @@ HEAD：指向当前分支
 
 
 
+```shell
+git checkout -b <branch>  # 表示创建并切换到新分支
+#上面命令相当于
+git branch <branch>  # 创建分支
+git checkout <branch>  # 切换分支
+git merge <branch>  # 将该分支合并到当前分支
+git branch -d <branch>  # 删除该分支
+git branch -D <branch>  # 强行删除一个没有被合并过的分支
+```
+
+查看分支：`git branch`
+
+创建分支：`git branch <branch>`
+
+切换分支：`git checkout <branch>`或者`git switch <branch>`
+
+创建+切换分支：`git checkout -b <branch>`或者`git switch -c <branch>`
+
+合并某分支到当前分支：`git merge <branch>`
+
+删除分支：`git branch -d <branch>`
+
+通常合并分支时，git会用 `Fast forward` 模式，但这种模式下，删除分支后会丢掉分支信息，可以使用`--no-ff`参数使用普通模式合并，合并后的历史有分支，能看出来曾经做过合并。
+
+查看分支合并图：`git log --graph`
+
+其他分支的commit ”复制“到当前分支：`git cherry-pick <commit>`
+
+### 贮藏
+
+把**工作区&暂存区**的内容贮藏到栈上：`git stash`或者`git stash push`
+
+贮藏后工作目录会变成干净的，可以直接切换到任意分支。
+
+查看栈上贮藏的内容：`git stash list`
+
+还原最近的一个贮藏到工作区：`git stash apply`
+
+还原指定某个贮藏到工作区：`git stash apply <stash@{x}>`
+
+上述两条命令无论贮藏的原内容是在工作区还是暂存区，都会被还原到工作区。要想还原到原来一样的位置，需要添加`--index`选项。而且并不会从`stash list`（栈）中删除，要想从栈中删除该贮藏，使用`git stash drop <stash@{x}>`。
+
+恢复并删除栈上的贮藏：`git stash pop`
+
 
 
