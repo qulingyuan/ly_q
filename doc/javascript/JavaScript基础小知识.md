@@ -103,3 +103,19 @@ result = (a !== null && a !== undefined) ? a : b;
 - `??` 返回第一个 **已定义的** 值。
 
 这样来看，`??` 更准确，因为 `||` 会把 `0` 判断成 `false` ，但 `??` 作为新语法，兼容性需要注意。
+
+### ?.(可选运算符)
+
+如果可选链 `?.` 前面的值为 `undefined` 或者 `null`，它会停止运算并返回 `undefined`。
+
+三种形式：
+
+1. `obj?.prop` —— 如果 `obj` 存在则返回 `obj.prop`，否则返回 `undefined`。
+2. `obj?.[prop]` —— 如果 `obj` 存在则返回 `obj[prop]`，否则返回 `undefined`。
+3. `obj.method?.()` —— 如果 `obj.method` 存在则调用 `obj.method()`，否则返回 `undefined`。
+
+```javascript
+let user = {}; // user 没有 address 属性
+alert( user.address?.street ); // undefined（不报错）
+```
+
