@@ -1,0 +1,1 @@
+自带录屏截屏：`command + shift +5`
