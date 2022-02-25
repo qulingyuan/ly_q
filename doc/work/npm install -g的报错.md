@@ -1,9 +1,11 @@
-### 问题背景
+# npm install -g 的报错
+
+## 问题背景
 
 使用`npm i typescript -g`命令时，报错如图所示：
 ![npm_error](https://github.com/qulingyuan/ly_q/blob/f5a06de8e4c7fbc952adfcced865d34cfe8bd8af/doc/media/typescript_ins_error_1.png)
 
-### 分析解决
+## 分析解决
 
 使用`ls -al`命令查看，发现npm的文件夹属于root用户，当前用户没有访问权限。原因明了，有两种解决方式：
 
