@@ -40,13 +40,13 @@
 
 ### 元素堆叠 z-index
 
-- z-index 只在定位元素(定义了`position`属性，且属性值为非`static`的元素)上有效果。
+- z-index 只在**定位元素**(定义了`position`属性，且属性值为非`static`的元素)上有效果。
 - 堆叠顺序由**层叠上下文**、**层叠等级**共同决定，层叠上下文可简单理解为父元素的层叠顺序。父元素`z-index`大的元素一定显示在前面，父元素`z-index`相同时，才会按照元素本身的`z-index`比较。
 - 同级元素，不设置`z-index`或`z-index`相等时，后面的元素会叠在前面的元素上方；`z-index`不同时，`z-index`大的元素会显示在前面。
 
 ### Flex 布局
 
-Flex布局包括Flex容器和Flex元素：
+Flex 布局包括 Flex 容器和 Flex 元素：
 
 - Flex容器：具有`display:flex`属性的元素。
 - Flex元素：父元素具有`display:flex`属性的元素。
@@ -101,11 +101,50 @@ Flex元素属性：
 
 #### 水平垂直居中
 
-`absolute` + `top:50%` + `left:50%` + `margin-top:元素高度负值的一半` + `margin-left:元素宽度负值的一半`。
+- `absolute` + `top:50%` + `left:50%` + `margin-top:元素高度负值的一半` + `margin-left:元素宽度负值的一半`。
 
-`absolute` + `top:50%` + `left:50%` + `translate:transform(-50%,-50%)`。
+- `absolute` + `top:50%` + `left:50%` + `translate:transform(-50%,-50%)`。
 
-`absolute` + `top,left,bottom,right均设为0` + `margin:auto`。
+- `absolute` + `top,left,bottom,right均设为0` + `margin:auto`。
 
-`display: flex` + `align-item:center` + `justify-content:center`。
+- `display: flex` + `align-item:center` + `justify-content:center`。
 
+### margin折叠
+
+概念：在CSS中，两个或多个**毗邻**的**普通流**中的**块级元素**（可能是父子元素，也可能是兄弟元素）在**垂直**方向上的外边距会发生叠加，其大小为单个边距的**最大值**。
+
+毗邻指元素之间没有 `border`或`padding`。
+
+三种情况：
+
+- 同一层相邻元素之间
+- 父元素与其第一个或最后一个子元素之间
+- 空的块级元素
+
+破坏任何一个必要条件即可防止 `margin` 折叠：
+
+- 使用 `float` 布局
+- `position` 为 `absolute`
+- `display` 设置为除 `block` 外的值
+- 设置元素的 `border` 或 `padding` 等属性。
+- overflow 等触发 `BFC`
+
+[参考链接](https://tech.youzan.com/css-margin-collapse/)
+
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)
+
+### margin负值问题
+
+- margin-top 和 margin-left 负值，元素向上、向左移动
+- margin-right 负值，右侧元素左移，自身不受影响
+- margin-bottom 负值，下方元素上移，自身不受影响
+
+### 伪类和伪元素
+
+css 引入伪类和伪元素概念是为了格式化文档树以外的信息。也就是说，伪类和伪元素是用来修饰不在文档树中的部分，比如，一句话中的第一个字母，或者是列表中的第一个元素。
+
+**伪类**用于当已有的元素处于某个状态时，为其添加对应的样式，这个状态是根据用户行为而动态变化的。比如说，当用户悬停在指定的元素时，我们可以通过 `:hover` 来描述这个元素的状态。
+
+**伪元素**用于创建一些不在文档树中的元素，并为其添加样式。它们允许我们为元素的某些部分设置样式。比如说，我们可以通过 `::before` 来在一个元素前增加一些文本，并为这些文本添加样式。虽然用户可以看到这些文本，但是这些文本实际上不在文档树中。
+
+有时你会发现伪元素使用了两个冒号（::）而不是一个冒号（:）。这是CSS3的一部分，并尝试区分伪类和伪元素。大多数浏览器都支持这两个值。按照规则应该使用（::）而不是（:），从而区分伪类和伪元素。但是，由于在旧版本的W3C规范并未对此进行特别区分，因此目前绝大多数的浏览器都支持使用这两种方式表示伪元素。
