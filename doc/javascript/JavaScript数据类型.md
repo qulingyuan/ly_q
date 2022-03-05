@@ -70,9 +70,9 @@ new Number(2) instanceof Number; // true
 
 通过 new 关键字创建出来的实例才是标准的数据类型 Number 这个类的实例。但是通过字面量创建的变量仍然可以调用 Number 的方法，这是因为 JS 对原始值进行类型包装导致的。
 
+### constructor
 
-
-
+call.toString()
 
 附录：
 

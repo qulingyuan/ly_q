@@ -1,12 +1,68 @@
+## 数据类型
+
+JavaScript 中共有七种内置类型，这些类型又分为基本类型和引用类型两大类。
+
+基本类型：`Null`，`Undefined`，`Boolean`，`Number`，`String`，`Symbol`，`bigInt`(ES10 新增)。
+
+引用类型：`Object`，`Function`，`Array`等。
+
+## 检测数据类型的方式
+
+1. ### typeof 操作符
+
+检测原始数据类型，`typeof` 可以识别除 `null` 外的所有基本类型，引用类型除 `function` 外全部识别为 `Object`。
+
+2. ### instanceof
+
+`instanceof` 运算符用来判断构造函数的 `prototype` 属性是否出现在对象的原型链中的任何位置。`instanceof` 只能用来判断两个对象是否属于实例关系，但并不能判断一个对象实例具体属于哪种类型。
+
+3. ### constructor
+
+undefined和 null 没有 constructor 属性，且 constructor 指向可以改变。
+
+4. ### Object.prototype.toString().call()
 
 
 
+```javascript
+function _typeof(obj){
+  var s = Object.prototype.toString.call(obj);
+  return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+};
+
+_typeof([12,3,343]);
+"array"
+```
 
 
 
+## 闭包
 
+堆栈内存
 
+垃圾回收
 
+this 指向
+
+箭头函数
+
+new 操作符
+
+封装类型
+
+原型
+
+Promise
+
+async/await
+
+手写 new，bind/call/apply，instanceof
+
+事件循环
+
+cookie
+
+localStorage
 
 
 
