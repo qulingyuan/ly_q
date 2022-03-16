@@ -129,6 +129,8 @@ console.log(foo);//输出 1
 
 ## 闭包
 
+### 定义
+
 闭包其实只是一个**绑定了执行环境的函数**。
 
 从理论上来说，在 JavaScript 中，由于每个函数都存在执行上下文，且执行上下文中都存在**词法环境**，所以JavaScript 中的函数就是闭包。
@@ -139,14 +141,60 @@ console.log(foo);//输出 1
 
 二是即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）。
 
-闭包的两个场景：
+### 闭包的场景
 
 1. 函数作为参数被传递
 2. 函数作为返回值被返回
 
+### 闭包的应用
+
+1. #### 模拟私有变量的实现
+
+```javascript
+//闭包隐藏数据，只提供API
+function createCache(){
+    const data = {}; // 闭包中的数据，被隐藏，不被外界访问
+    return {
+        set:function(key,val){
+            data[key] = val;
+        },
+        get:function(key){
+            return data[key];
+        }
+    }
+}
+
+const c = createCache();
+c.set("a",100);
+console.log(c.get("a"));
+```
+
+2. #### 共享变量
 
 
 
+2. #### 偏函数和柯里化
+
+柯里化：是把接受多个参数的函数变换成接受 一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
+
+偏函数：固定你函数的某一个或几个参数，然后返回一个新的函数(这 个函数用于接收剩下的参数)。
+
+柯里化封装函数：
+
+```javascript
+//args.length是实参长度，func.length是形参长度
+function curry(func) {
+  return function curried(...args) {
+    if (args.length >= func.length) {
+      return func.apply(this, args);
+    } else {
+      return function(...args2) {
+        return curried.apply(this, args.concat(args2));
+      }
+    }
+  };
+}
+```
 
 
 
