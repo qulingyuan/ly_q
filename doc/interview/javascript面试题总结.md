@@ -10,7 +10,7 @@ JavaScript 中共有七种内置类型，这些类型又分为基本类型和引
 
 1. ### typeof 操作符
 
-检测原始数据类型，`typeof` 可以识别除 `null` 外的所有基本类型，引用类型除 `function` 外全部识别为 `Object`。
+检测原始数据类型，`typeof` 可以识别除 `null` 外的所有基本类型，引用类型除 `function` 外全部识别为 `Object`。未定义的变量 `typeof` 返回 `undefined`。
 
 2. ### instanceof
 
@@ -26,6 +26,7 @@ undefined和 null 没有 constructor 属性，且 constructor 指向可以改变
 
 ```javascript
 function _typeof(obj){
+  //对于基本类型，应该用 typeof，因为 call 会触发基本类型的装箱操作，浪费性能。
   var s = Object.prototype.toString.call(obj);
   return s.match(/\[object (.*?)\]/)[1].toLowerCase();
 };
@@ -148,7 +149,7 @@ console.log(foo);//输出 1
 
 ### 闭包的应用
 
-1. #### 模拟私有变量的实现
+1. #### 隐藏数据/模拟私有变量的实现
 
 ```javascript
 //闭包隐藏数据，只提供API
@@ -169,11 +170,42 @@ c.set("a",100);
 console.log(c.get("a"));
 ```
 
-2. #### 共享变量
+2. #### 模拟私有变量的实现
+
+```javascript
+// 利用闭包生成IIFE，返回 User 类
+const User = (function() {
+    // 定义私有变量_password
+    let _password
+
+    class User {
+        constructor (username, password) {
+            // 初始化私有变量_password
+            _password = password
+            this.username = username
+        }
+
+       login() {
+           // 这里我们增加一行 console，为了验证 login 里仍可以顺利拿到密码
+           console.log(this.username, _password)
+           // 使用 fetch 进行登录请求，同上，此处省略
+       }
+    }
+
+    return User
+})()
+
+let user = new User('ly', 'pageNotFound')
+
+console.log(user.username)
+console.log(user.password)
+console.log(user._password)
+user.login()
+```
 
 
 
-2. #### 偏函数和柯里化
+3. #### 	偏函数和柯里化
 
 柯里化：是把接受多个参数的函数变换成接受 一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
 
@@ -183,17 +215,28 @@ console.log(c.get("a"));
 
 ```javascript
 //args.length是实参长度，func.length是形参长度
+//函数柯里化
 function curry(func) {
   return function curried(...args) {
     if (args.length >= func.length) {
       return func.apply(this, args);
     } else {
-      return function(...args2) {
+      return function (...args2) {
         return curried.apply(this, args.concat(args2));
-      }
+      };
     }
   };
 }
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+const currysum = curry(sum);
+
+console.log(currysum(1)(2)(3)); //6
+console.log(currysum(1)(2, 3)); //6
+console.log(currysum(1, 2, 3)); //6
 ```
 
 
@@ -239,39 +282,166 @@ localStorage
 
 [垃圾回收](https://segmentfault.com/a/1190000006104910)
 
+## null 和 undefined 区别
 
+`null` 和 `undefined` 都是基本数据类型。
 
+`undefined` 表示未定义，还有在变量声明但未初始化时相当于给变量赋值了 `undefined`。但在 JavaScript 中，`undefined` 只是一个变量，而不是关键字。为避免 `undefined` 被篡改，可使用 `void 0` 安全地获取 `undefined` 值。
 
+`null` 表示一个**空对象指针**。在定义将来要保存对象值的变量时，建议使用 `null` 来初始化。
 
+## 浮点数精度计算
 
+由于二进制不能精确表示所有的整数。
 
+```javascript
+console.log( 0.1 + 0.2 === 0.3); //false
+```
 
+**检查等式左右两边差的绝对值是否小于最小精度**，才是正确的比较浮点数的方法:
 
+```javascript
+console.log( Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON);
+```
 
+## 装箱
 
+基本类型 `Number`、`String`、`Boolean`、`Symbol` 在对象中都有对应的类。所谓装箱转换，就是把基本类型转换为对应的对象。
 
+`call` 方法的第一个参数为基本类型时，该原始值会被装箱。利用该特性，我们可以来强制装箱：
 
+```javascript
+console.log(typeof Symbol('a')); //symbol
+var symbolObject = (function(){ return this; }).call(Symbol('a')); 
+console.log(typeof symbolObject); //object 
+console.log(symbolObject instanceof Symbol); //true 
+console.log(symbolObject.constructor === Symbol); //true
+```
 
+也可以使用 `Object` 函数显示调用装箱能力。
 
+```javascript
+console.log(Symbol('a') instanceof Symbol); //false
+console.log(Object(Symbol('a')) instanceof Symbol); //true
+```
 
+装箱机制会频繁产生临时对象，应尽量避免。
 
+## 拆箱
 
+拆箱是把对象类型转换为基本类型。
 
+对象到 `String` 和 `Number` 的转换都遵循“先拆箱再转换”的规则。
 
+拆箱转换会尝试调用 `valueOf` 和 `toString` 来**获得拆箱后的基本类型**。到 `Number` 的转换优先调用 `valueOf` 方法；到 `String` 的转换优先调用 `valueOf` 方法。
 
+```javascript
+	//转换成 Number，优先调用 valueOf
+		var o = {
+        valueOf : () => {console.log("valueOf"); return {}},
+        toString : () => {console.log("toString"); return {}}
+    }
 
+    o * 2
+    // valueOf
+    // toString
+    // TypeError
 
+	//转换成 String，优先调用 toString。
+    var o = {
+        valueOf : () => {console.log("valueOf"); return {}},
+        toString : () => {console.log("toString"); return {}}
+    }
 
+   String(o)
+    // toString
+    // valueOf
+    // TypeError
+```
 
+`Symbol.toPrimitive` 是一个内置的 Symbol 值，它是作为对象的函数值属性存在的，当一个对象转换为对应的原始值时，会调用此函数，可使用该函数覆盖原有行为。
 
+```javascript
 
+    var o = {
+        valueOf : () => {console.log("valueOf"); return {}},
+        toString : () => {console.log("toString"); return {}}
+    }
+		//toPrimitive 被调用时，会传递一个字符串参数 hint，表示要转换到的原始值的预期类型。
+    //hint:"string"|"number"|"default" 
+    o[Symbol.toPrimitive] = (hint) => {console.log("toPrimitive"); return "hello"}
+    console.log(o + "")
+    // toPrimitive
+    // hello
+```
 
+## 理解 JavaScript 的对象的属性
 
+大多数编程语言中，对象具有三种特征：
 
+- 唯一标识性：即使完全相同的两个对象，也并非同一个对象。一般都是用内存地址来体现的。
+- 状态：对象具有状态，同一对象可能处于不同状态之下。
+- 行为：对象的状态，可能因为它的行为产生变迁。
 
+对于上述的状态和行为，不同语言的术语不同，C++ 中称它们为“成员变量”和“成员函数”，Java 中则称它们为“属性”和“方法”。在 JavaScript 中，将状态和行为统一抽象为“**属性**”。
 
+JavaScript 中对象独有的特色是：**对象具有高度的动态性，这是因为 JavaScript 赋予了使用者在运行时为对象添改状态和行为的能力**。
 
+JavaScript 中的对象有数据属性和访问器属性(getter/setter)两类属性。
 
+### 数据属性
+
+- value：就是属性的值。
+- writable：决定属性能否被赋值，默认为 true。
+- enumerable：决定 for in 能否枚举该属性，默认为 true。
+- configurable：决定该属性能否被删除或者改变特征值，默认为 true。
+
+### 访问器属性
+
+- getter：函数或 undefined，在取属性值时被调用。
+- setter：函数或 undefined，在设置属性值时被调用。
+- enumerable：决定 for in 能否枚举该属性。
+- configurable：决定该属性能否被删除或者改变特征值。
+
+我们通常用于定义属性的代码会产生数据属性，可以使用内置方法`Object.getOwnPropertyDescriptor(obj,props)`查看一个对象的**自有属性**对应的属性描述符（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）：
+
+```javascript
+
+    var o = { a: 1 };
+    o.b = 2;
+    //a和b皆为数据属性
+    Object.getOwnPropertyDescriptor(o,"a") // {value: 1, writable: true, enumerable: true, configurable: true}
+    Object.getOwnPropertyDescriptor(o,"b") // {value: 2, writable: true, enumerable: true, configurable: true}
+```
+
+要想改变属性的特征，或者定义访问器属性，可以使用 `Object.defineProperty(obj,prop,descriptor)`来定义一个新属性或者修改现有属性。
+
+```javascript
+
+    var o = { a: 1 };
+    Object.defineProperty(o, "b", {value: 2, writable: false, enumerable: false, configurable: true});
+    //a和b都是数据属性，但特征值变化了
+    Object.getOwnPropertyDescriptor(o,"a"); // {value: 1, writable: true, enumerable: true, configurable: true}
+    Object.getOwnPropertyDescriptor(o,"b"); // {value: 2, writable: false, enumerable: false, configurable: true}
+    o.b = 3;
+    console.log(o.b); // 2
+```
+
+在创建对象时，也可以使用 `get` 和 `set` 关键字来创建访问器属性:
+
+```javascript
+var o = { get a() { return 1 } }; 
+console.log(o.a); // 1
+Object.getOwnPropertyDescriptor(o,"a")//{get: ƒ a(), set: undefined, enumerable: true, configurable: true}
+```
+
+JavaScript 对象的运行时是一个“属性的集合”，是一个**属性的索引结构**。属性以字符串或者 `Symbol` 为 `key`，以数据属性特征值或者访问器属性特征值为 `value`。
+
+### 总结
+
+JavaScript 对象的具体设计：具有高度动态性的属性集合。
+
+## JavaScript原型对象
 
 
 
