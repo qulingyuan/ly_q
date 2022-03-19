@@ -443,11 +443,53 @@ JavaScript 对象的具体设计：具有高度动态性的属性集合。
 
 ## JavaScript原型对象
 
+ES3 之前，“类”的定义是一个私有属性[[class]]，唯一可以访问[[class]]属性的方法是`Object.prototype.toString`。
+
+ES5 开始，[[class]] 私有属性被 `Symbol.toStringTag` 代替，可以使用 `Symbol.toStringTag` 来自定义 `Object.prototype.toString` 的行为：
+
+```javascript
+    var o = { [Symbol.toStringTag]: "MyObject" }
+    console.log(o + "");//触发 Object.prototype.toString 的调用
+		//[object MyObject]
+```
 
 
 
+`Object.create` 根据指定的原型创建新对象，原型可以是 null；`Object.getPrototypeOf` 获得一个对象的原型；`Object.setPrototypeOf` 设置一个对象的原型。
 
+new 运算接受一个构造器和一组调用参数，实际上做了几件事：以构造器的 prototype 属性（注意与私有字段[[prototype]]的区分）为原型，创建新对象；将 this 和调用参数传给构造器，执行；如果构造器返回的是对象，则返回，否则返回第一步创建的对象。
 
+new 这样的行为，试图让函数对象在语法上跟类变得相似，但是，它客观上提供了两种方式，一是在构造器中添加属性，二是在构造器的 prototype 属性上添加属性。
+
+```javascript
+
+function c1(){
+    this.p1 = 1;
+    this.p2 = function(){
+        console.log(this.p1);
+    }
+} 
+var o1 = new c1;
+o1.p2();
+//1
+
+function c2(){
+}
+c2.prototype.p1 = 1;
+c2.prototype.p2 = function(){
+    console.log(this.p1);
+}
+
+var o2 = new c2;
+o2.p2();
+//1
+```
+
+第一种方法是直接在构造器中修改 this，给 this 添加属性。
+
+第二种方法是修改构造器的 prototype 属性指向的对象，它是从这个构造器构造出来的所有对象的原型。
+
+类的写法实际上也是由原型运行时来承载的，逻辑上 JavaScript 认为每个类是有共同原型的一组对象，类中定义的方法和属性则会被写在原型对象之上。
 
 
 
