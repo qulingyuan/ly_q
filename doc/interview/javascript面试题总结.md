@@ -251,6 +251,8 @@ this 指向
 
 ## new 操作符做了什么
 
+JavaScript 中，只有**普通函数和类**能够跟 new 搭配使用。
+
 `new` 操作符：
 
 1. 首先创建了一个新的空对象
@@ -521,4 +523,40 @@ node 执行一个文件时，会在文件内生成一个 `exports` 和 `module` 
 
 ## 宏任务和微任务
 
-那么采纳 JSC 引擎的术语，我们把宿主发起的任务称为宏观任务，把 JavaScript 引擎发起的任务称为微观任务。
+采纳 JSC 引擎的术语，我们把宿主发起的任务称为宏观任务，把 JavaScript 引擎发起的任务称为微观任务。
+
+## 超链接里的javascript:void(0)的意义
+
+为了阻止`<a>`标签的链接跳转，我们经常会使用`javascript:void(0);`，
+
+## call、apply、bind
+
+当方法被传递到与对象分开的某个地方，`this` 就会丢失。为了解决这个问题，JavaScript 提供了内置函数 `call`、`apply`、`bind`，这三者都可以指定函数调用时传入的 `this` 值，区别在于 `bind` 会返回一个新函数，而 `call` 和 `apply` 是直接调用。`call` 和 `apply` 的区别是，`call` 方法接受的是一个参数列表，而 `apply` 方法接受的是一个包含多个参数的数组。
+
+
+
+手写 `call`：
+
+```javascript
+//1.将函数设为对象的属性
+//2.执行该函数
+//3.删除该函数
+Function.prototype.call2 = function (context) {
+    context = context || window;
+    const arg = [...arguments].slice(1);
+    context.func = this;
+    context.func(...arg);
+    delete context.func;
+};
+```
+
+手写 bind：
+
+```javascript
+```
+
+## this
+
+调用函数时使用的引用，决定了函数执行时刻的 this 值。
+
+生成器函数、异步生成器函数和异步普通函数跟普通函数行为是一致的，异步箭头函数与箭头函数行为是一致的。
