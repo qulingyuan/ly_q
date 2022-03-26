@@ -56,15 +56,21 @@ sayHi();
 
 `IIFE `叫做立即执行函数 (immediately-invoked function expressions)。
 
-由于 ES6 以前只有 var 声明方式，而 var 声明方式没有会计作用于，所以我们经常会使用 IIFE 来模仿块级作用域。使用方式如下：
+由于 ES6 以前只有 `var` 声明方式，而 `var` 声明方式没有块级作用域，所以我们经常会使用 `IIFE` 来模仿块级作用域。最常见的使用方式是加括号：
 
 ```javascript
 (function() {
-
   var message = "Hello";
-
   alert(message); // Hello
-
 })();
+```
+
+也可以使用 `void` 关键字的写法：
+
+```javascript
+void function() {
+  var message = "Hello";
+  alert(message); // Hello
+}();
 ```
 
