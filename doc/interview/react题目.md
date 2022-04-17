@@ -24,13 +24,9 @@ setState(updater,[callback]);
 
 `setState`可以接受两个参数，第一个参数可以是**对象**或**函数**，第二个可选参数是函数。
 
-第一个参数为对象的写法：
+**第一个参数为对象时**：
 
-```react
-this.setState(newState);
-```
-
-这种写法会在同一周期内会将多个setState进行**批处理**。
+在同一周期内，React 会将多个 setState 进行**批处理**。
 
 ```react
  handleClick () {

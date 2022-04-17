@@ -2,7 +2,7 @@
 
 react native 一共提供了两种动画，一种是可以绘制自定义动画的 `Animated` ；另一种是负责布局动画的`LayoutAnimation`。
 
-官网给出的创建动画的过程：
+官网给出的创建动画的步骤：
 
 > The core workflow for creating an animation is to create an `Animated.Value`, hook it up to one or more style attributes of an animated component, and then drive updates via animations using `Animated.timing()`.
 
