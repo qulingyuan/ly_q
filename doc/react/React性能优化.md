@@ -1,5 +1,3 @@
-
-
 # React 性能优化
 
 React 提供了很多优化的 API，比如 memo,useMemo,useCallback 等等，但是如何正确使用这些 api 一直是困扰我的难题。前两天很幸运看到了卡颂大佬的一场直播，听完之后感觉特别有收获，所以就把直播内容整理了出来。
@@ -10,7 +8,7 @@ React 提供了很多优化的 API，比如 memo,useMemo,useCallback 等等，�
 
 ![image-20220430162251288](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430162251288.png)
 
-如图，在 `App` 这个组件树中，如果只更改了 `Comment` 这个组件，触发了一次更新，React 会从头开始遍历，即会从 `App` 这个组件再上一层的组件开始创建一棵全新的组件树。对于除了`Comment`组件以外的节点而言，它们没有产生变化，但是 React 却重新创建了树，这就是一种性能的浪费，这时候我们就需要一些性能优化的手段，让React 跳过那些没有发生变化的组件。所以这就是为什么 React 需要性能优化的 API。
+如图，在 `App` 这个组件树中，如果在 `Comment` 这个组件触发了一次更新，React 会从头开始遍历，即会从 `App` 这个组件再上一层的组件开始遍历整棵组件数。也就是从 `App` 上一层的组件开始创建一棵全新的组件树。对于除了`Comment`组件以外的节点而言，它们没有产生变化，但是 React 却重新创建了树，这就是一种性能的浪费，这时候我们就需要一些性能优化的手段，让React 跳过那些没有发生变化的组件。所以这就是为什么 React 需要性能优化的 API。
 
 ## React 性能优化应该遵循的法则
 
@@ -55,7 +53,7 @@ export default function App() {
 
 上面代码，在 input 中，每触发一次输入操作，控制台就会输出一次，这表明`<App>`组件更新的时候，`App`的子组件`ExpensiveCpn`组件都会 render。
 
-根据分离原则，我们把 App 中变的部分，也就是 state 分离出来：
+根据分离原则，我们把 `App` 中变的部分，也就是 `state` 分离出来：
 
 ```react
 import { useState } from "react";
@@ -151,7 +149,7 @@ export default function App() {
 }
 ```
 
-此时 `App` 中没有 state、props、context，所以它就是一个“不变”的组件，不变的部分就会被 React 性能优化掉。
+此时 `App` 中没有 `state`、`props`、`context`，所以它就是一个“不变”的组件，不变的部分就会被 React 性能优化掉。
 
 上面两个例子中，我们把父组件中变的部分抽离出来，但起到性能优化效果的是子孙组件。所以我们可以发现一个规律：当父组件满足性能优化条件时，子孙组件可能命中性能优化。
 
@@ -228,7 +226,7 @@ export default function App() {
 
 分析一下过程：
 
-首先 `App` 组件由于包含变的部分，所以 render 了，子组件会从父组件中取到 `props`，`Middle` 看起来没有 `props`，但其实它的 `props` 是一个空对象。由于 React 默认使用全等来比较 props，所以两个空对象比较结果为不等。所以 `Middle` 组件的 `props`前后比较是不同的，所以 `Middle` 不会命中性能优化 。进而可以推出其子组件`Button` 的 `props` 也是一个空对象。
+首先 `App` 组件由于包含变的部分，所以 render 了，子组件会从父组件中取到 `props`，`Middle` 看起来没有 `props`，但其实它的 `props` 是一个空对象。由于 React 默认使用全等来比较 `props`，所以两个空对象比较结果为不等。所以 `Middle` 组件的 `props`前后比较是不同的，所以 `Middle` 不会命中性能优化 。进而可以推出其子组件`Button` 的 `props` 也是一个空对象。
 
 如下图：
 
@@ -259,7 +257,7 @@ const Middle = React.memo(() => {
 
 ![image-20220430222708425](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430222708425.png)
 
-可以发现，在 `Button` 中，我们并没有使用 react.memo 来进行优化，即 `Button` 的 `props` 仍然是默认使用的全能比较，但结果仍然为 `true`。因为 `Button` 的 `props` 是 `Middle` 满足了性能优化条件之后传给 Button 的，也就是复用了之前的 `props`，是同一个 `props`。同时，`Button` 又满足没有 `state`，`context` 也是不变的，所以 `Button` 命中了性能优化。
+可以发现，在 `Button` 中，我们并没有使用 react.memo 来进行优化，即 `Button` 的 `props` 仍然是默认使用的全能比较，但结果仍然为 `true`。因为 `Button` 的 `props` 是 `Middle` 满足了性能优化条件之后传给 `Button` 的，也就是复用了之前的 `props`，是同一个 `props`。同时，`Button` 又满足没有 `state`，`context` 也是不变的，所以 `Button` 命中了性能优化。
 
 本案例使用 `useMemo` 也能达到 `memo` 的效果：
 
@@ -326,6 +324,18 @@ export default function App() {
 }
 ```
 
+运行结果：
 
+![2022-04-30_22-52-16 (1)](https://gitee.com/qulingyuan/ly_picture/raw/master/img/2022-04-30_22-52-16%20(1).gif)
 
-## 性能优化背后的源码运行机制
+当满足性能优化条件以后，整个链路上的子孙组件都不会 render。
+
+所以这就是为什么 React 虽然每次更新都要遍历整棵组件树，但是只要优化得当，性能不会很差。当整棵子树都命中性能优化策略后，该子树是能够完整的被跳过的。
+
+回到文章开头的案例，如果我们优化得当，那么最终达到的效果应该是只有 `App`，`Body`以及`Comment` 这个链路上的组件更新了，而其他不相关的组件都不需要 render。
+
+## 总结
+
+1. 使用 `devtool` 寻找项目中的性能损耗严重的子树
+2. 在自述的根节点使用性能优化 API
+3. 子树中运用变与不变分离法则
