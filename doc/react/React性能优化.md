@@ -1,6 +1,6 @@
 # React 性能优化
 
-React 提供了很多优化的 API，比如 memo,useMemo,useCallback 等等，但是如何正确使用这些 api 一直是困扰我的难题。前两天很幸运看到了卡颂大佬的一场直播，听完之后感觉特别有收获，所以就把直播内容整理了出来。
+React 提供了很多优化的 API，比如 `memo`,`useMemo`,`useCallback` 等等，他们的作用我们基本都知道，但是如何正确使用这些 api 一直是困扰大部分人的难题。前两天很幸运看到了卡颂大佬的一场直播，听完之后感觉特别有收获，所以就把直播内容整理了出来。
 
 ## 为什么 React 需要性能优化 API
 
@@ -8,7 +8,7 @@ React 提供了很多优化的 API，比如 memo,useMemo,useCallback 等等，�
 
 ![image-20220430162251288](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430162251288.png)
 
-如图，在 `App` 这个组件树中，如果在 `Comment` 这个组件触发了一次更新，React 会从头开始遍历，即会从 `App` 这个组件再上一层的组件开始遍历整棵组件数。也就是从 `App` 上一层的组件开始创建一棵全新的组件树。对于除了`Comment`组件以外的节点而言，它们没有产生变化，但是 React 却重新创建了树，这就是一种性能的浪费，这时候我们就需要一些性能优化的手段，让React 跳过那些没有发生变化的组件。所以这就是为什么 React 需要性能优化的 API。
+如图，在 `App` 这个组件树中，如果在 `Comment` 这个组件触发了一次更新，React 会从头开始遍历，即会从 `App` 这个组件再上一层的组件开始遍历整棵组件树。然后从 `App` 上一层的组件开始创建一棵全新的组件树。对于除了`Comment`组件以外的节点而言，它们并没有产生变化，但是 React 却重新创建这些节点，这就是一种性能的浪费，这时候我们就需要一些性能优化的手段，让React 跳过那些没有发生变化的组件。所以这就是为什么 React 需要性能优化的 API。
 
 ## React 性能优化应该遵循的法则
 
@@ -90,7 +90,7 @@ export default function App() {
 
 ![2022-04-30_16-52-47 (1)](https://gitee.com/qulingyuan/ly_picture/raw/master/img/2022-04-30_16-52-47%20(1).gif)
 
-此时，输入操作不会触发`ExpensiveCpn`的 render 了。可以看到，如果代码的组织结构得当，不需要性能优化api 的。
+此时，输入操作就不会触发`ExpensiveCpn`的 render 了。可以看到，如果代码的组织结构得当，是不需要性能优化api 的。
 
 ### 案例 2
 
@@ -155,7 +155,7 @@ export default function App() {
 
 为什么会这样呢？
 
-因为刚才说到，对于一个React 组件，props 是从父组件传过来的，只有当父组件满足了性能优化的条件以后，父组件传过来的 props 才是不变的。**在父组件传过来的 `props` 不变的情况下，子组件还需要满足自己的 `state` 和 `context` 不变，此时子组件才会命中性能优化。**
+因为刚才说到，对于一个React 组件，`props` 是从父组件传过来的，只有当父组件满足了性能优化的条件以后，父组件传过来的 props 才是不变的。**在父组件传过来的 `props` 不变的情况下，子组件还需要满足自己的 `state` 和 `context` 不变，此时子组件才会命中性能优化。**
 
 性能优化的目的是让组件不执行，组件不执行的前提是组件执行和不执行的返回值相同。能够改变组件返回值的也就是 `props`、`state`、`context`，当这三者都不变的情况下，就能够保证返回值是相同的。
 
@@ -226,17 +226,17 @@ export default function App() {
 
 分析一下过程：
 
-首先 `App` 组件由于包含变的部分，所以 render 了，子组件会从父组件中取到 `props`，`Middle` 看起来没有 `props`，但其实它的 `props` 是一个空对象。由于 React 默认使用全等来比较 `props`，所以两个空对象比较结果为不等。所以 `Middle` 组件的 `props`前后比较是不同的，所以 `Middle` 不会命中性能优化 。进而可以推出其子组件`Button` 的 `props` 也是一个空对象。
+首先 `App` 组件由于包含变的部分，所以 render 了，子组件会从父组件中取到 `props`，`Middle` 看起来没有 `props`，但其实它的 `props` 是一个空对象`{}`。由于 React 默认使用全等来比较 `props`，所以两个空对象比较结果为不等，即 `Middle` 组件的 `props`前后比较是不同的，所以 `Middle` 不会命中性能优化 。进而可以推出其子组件`Button` 的 `props` 也是一个空对象。
 
-如下图：
+debug 结果如下图：
 
 ![image-20220430215444656](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430215444656.png)
 
-
+一个没有任何 props 的组件，它的 props 是空对象`{}`。
 
 ![image-20220430202014513](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430202014513.png)
 
-一个没有任何 props 的组件，它的 props 是空对象`{}`。
+
 
 由上可知，当组件树从某一节点开始不能命中性能优化以后，由于 `props` 全等比较的方式一直会传染下去，即使那个节点的子孙结点的代码结构都很完美，最终也会导致整个子树都无法命中性能优化。这就是为什么我们需要性能优化 api。
 
