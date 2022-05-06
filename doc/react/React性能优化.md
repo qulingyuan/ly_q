@@ -6,7 +6,7 @@ React 提供了很多优化的 API，比如 `memo`,`useMemo`,`useCallback` 等�
 
 
 
-![image-20220430162251288](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430162251288.png)
+![image-20220430162251288](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061530314.png)
 
 如图，在 `App` 这个组件树中，如果在 `Comment` 这个组件触发了一次更新，React 会从头开始遍历，即会从 `App` 这个组件再上一层的组件开始遍历整棵组件树。然后从 `App` 上一层的组件开始创建一棵全新的组件树。对于除了`Comment`组件以外的节点而言，它们并没有产生变化，但是 React 却重新创建这些节点，这就是一种性能的浪费，这时候我们就需要一些性能优化的手段，让React 跳过那些没有发生变化的组件。所以这就是为什么 React 需要性能优化的 API。
 
@@ -49,7 +49,7 @@ export default function App() {
 
 结果如图：
 
-![2022-04-30_15-49-58 (2)](https://gitee.com/qulingyuan/ly_picture/raw/master/img/2022-04-30_15-49-58%20(2).gif)
+![2022-04-30_15-49-58 (2)](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061532122.gif)
 
 上面代码，在 input 中，每触发一次输入操作，控制台就会输出一次，这表明`<App>`组件更新的时候，`App`的子组件`ExpensiveCpn`组件都会 render。
 
@@ -88,7 +88,7 @@ export default function App() {
 
 结果如图：
 
-![2022-04-30_16-52-47 (1)](https://gitee.com/qulingyuan/ly_picture/raw/master/img/2022-04-30_16-52-47%20(1).gif)
+![2022-04-30_16-52-47 (1)](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061535520.gif)
 
 此时，输入操作就不会触发`ExpensiveCpn`的 render 了。可以看到，如果代码的组织结构得当，是不需要性能优化api 的。
 
@@ -218,7 +218,7 @@ export default function App() {
 
 来看结果：
 
-![2022-04-30_19-43-51 (1)](https://gitee.com/qulingyuan/ly_picture/raw/master/img/2022-04-30_19-43-51%20(1).gif)
+![2022-04-30_19-43-51 (1)](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061552871.gif)
 
 
 
@@ -230,11 +230,11 @@ export default function App() {
 
 debug 结果如下图：
 
-![image-20220430215444656](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430215444656.png)
+![image-20220430215444656](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061558583.png)
 
 一个没有任何 props 的组件，它的 props 是空对象`{}`。
 
-![image-20220430202014513](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430202014513.png)
+![image-20220430202014513](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061558732.png)
 
 
 
@@ -255,7 +255,7 @@ const Middle = React.memo(() => {
 
 此时 debug 看一下 `Button` 的 `oldProps` 和 `newProps` 如图：
 
-![image-20220430222708425](https://gitee.com/qulingyuan/ly_picture/raw/master/img/image-20220430222708425.png)
+![image-20220430222708425](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061559844.png)
 
 可以发现，在 `Button` 中，我们并没有使用 react.memo 来进行优化，即 `Button` 的 `props` 仍然是默认使用的全能比较，但结果仍然为 `true`。因为 `Button` 的 `props` 是 `Middle` 满足了性能优化条件之后传给 `Button` 的，也就是复用了之前的 `props`，是同一个 `props`。同时，`Button` 又满足没有 `state`，`context` 也是不变的，所以 `Button` 命中了性能优化。
 
@@ -326,7 +326,7 @@ export default function App() {
 
 运行结果：
 
-![2022-04-30_22-52-16 (1)](https://gitee.com/qulingyuan/ly_picture/raw/master/img/2022-04-30_22-52-16%20(1).gif)
+![2022-04-30_22-52-16 (1)](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205061559517.gif)
 
 当满足性能优化条件以后，整个链路上的子孙组件都不会 render。
 
