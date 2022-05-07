@@ -1,6 +1,6 @@
 ## 为什么要写这系列文章？
 
-个人觉得 webpack5 文档写的太散了，初学者入手太困难，
+个人觉得 webpack5 文档写的有点散，初学的话不知道从哪里入手，这系列文章主要把webpack5 在实际项目中常用一些配置串讲起来，希望对大家理解 webpack 有帮助。
 
 ## Webpack是什么？
 
@@ -71,7 +71,7 @@ module.exports = {
 
 - mode：表示开发模式，可选值为`'none' | 'development' | 'production'`，默认值为 `production`，不同模式下，开启了不同的功能优化。
 - entry：表示 `webpack` 的打包入口，是构建模块打包的起点。
-- output：表示创建的 bundle 的输出位置。
+- output：表示创建的 bundle 的输出位置。`entry` 可以有多个，但 `output` 只能有一个。
 
 你肯定想问 `name`、`contenthash:8`都是什么东西，别急，在解释这个之前，让我们先执行一下打包操作。
 
@@ -93,4 +93,22 @@ console.log("Page_not_found");
 
 ![image-20220506221750513](https://cdn.jsdelivr.net/gh/qulingyuan/ly_picture@master/img/202205062217602.png)
 
-解释一下 `filename` 属性中用到了使用`[]`包装起来的变量，它们被称为“占位符”。其中 `name` 表示 `entry` 的名称，这里我们没有设置 `entry` 的名称，默认为 `main`。`contenthash`表示文件内容的 `hash` 值，主要是用来判断文件内容是否有改动，后面加`:8`表示 `hash`值的位数。
+解释一下 `filename` 属性中用到了使用`[]`包装起来的变量，它们被称为“占位符”。其中`contenthash`表示文件内容的 `hash` 值，主要是用来判断文件内容是否有改动，后面加`:8`表示限定 `hash`值的位数。`name` 一般会用于 `entry` 为多入口文件时，会对应 `entry` 的名称，这里我们没有设置 `entry` 的名称，默认为 `main`。如果设置 entry 如下:
+
+```javascript
+  entry: {
+    input: "./src/index.js",
+  },
+```
+
+这是生成的文件名称的 `name` 部分就为 `input` 了
+
+以下三种方式都是可以的：
+
+- `[name].[hash].bundle.js`
+- `[name].[chunkhash].bundle.js`
+- `[name].[hash].bundle.js`
+
+创建一个 `html` 文件并将打包好的 js 文件通过 `<script>`标签引入，即可看到代码效果。
+
+至此，我们已经熟悉了 `webpack` 中非常重要的三个核心概念：`entry`、`output` 和 `mode`。下一篇，我们将会介绍 `loader` 的使用。
