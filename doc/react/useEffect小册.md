@@ -9,3 +9,5 @@ useEffect代码不会阻塞浏览器绘制。在时机上 ，componentDidMount /
 useInsertionEffect 的执行时机要比 useLayoutEffect 提前，useLayoutEffect 执行的时候 DOM 已经更新了，useInsertionEffect 的执行的时候，DOM 还没有更新。
 
 useInsertionEffect 主要是解决 CSS-in-JS 在渲染中注入样式的性能问题
+
+useLayoutEffect 是在 render 后同步执行的，useEffect 是在 render 后异步执行的，所以用 useLayoutEffect 能保证在 useEffect 之前被调用。
