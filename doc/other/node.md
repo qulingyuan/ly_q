@@ -33,3 +33,8 @@ Node能做什么？
 `process`
 
 `process.argv`可以获取命令行输入的值
+
+`exports` 导出的对象与外部 require 的对象是同一个引用。
+
+修改 `module.exports`会把 `exports` 全部覆盖掉
+
