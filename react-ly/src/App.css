@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftBar {
+  width: 100px;
+}
+
+.rightContent {
+  flex: 1;
+  border-left: 1px solid #010812;
+  padding-left: 20px;
+}
