@@ -1,6 +1,6 @@
 import * as React from "react";
 
-class StateCom1 extends React.Component {
+class StateClass1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class StateCom1 extends React.Component {
     );
   }
 }
-class StateCom2 extends React.Component {
+class StateClass2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,13 +50,13 @@ class StateCom2 extends React.Component {
   }
 }
 
-export default class StateCom extends React.Component {
+export default class StateClass extends React.Component {
   render() {
     return (
       <>
         <h2>类组件的 state 合并问题</h2>
-        <StateCom1 />
-        <StateCom2 />
+        <StateClass1 />
+        <StateClass2 />
       </>
     );
   }

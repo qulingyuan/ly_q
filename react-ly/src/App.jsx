@@ -1,14 +1,14 @@
 import React, { Suspense, lazy } from "react";
-import ReactDom from "react-dom";
 // import Home from "./pages/Home";
 // import About from "./pages/About";
 import "./App.css";
-import { Link, Routes, Route } from "react-router-dom";
-import StateCom from "./pages/state/StateCom";
-import StateFun from "./pages/state/StateFun";
+import { Link, NavLink, Routes, Route } from "react-router-dom";
+import StateFuncVsClass from "./pages/state/StateFuncVsClass";
 import UseEffect from "./pages/Home/UseEffect";
 import FunVsClass from "./pages/FunVsClass/index";
 import ClosureTrap from "./pages/ClosureTrap";
+import DidMountState from "./pages/LifeCycle/DidMountState";
+import EffectCase from "./pages/LifeCycle/EffectCase";
 const Home = lazy(() => import(/* webpackChunkName: 'home'*/ "./pages/Home")); //给 chunk 包起名字
 const About = lazy(() =>
   import(/* webpackChunkName: 'about'*/ "./pages/About")
@@ -18,18 +18,26 @@ function App() {
   const routerObj = [
     { name: "Home", component: Home },
     { name: "About", component: About },
-    { name: "StateCom", component: StateCom },
-    { name: "StateFun", component: StateFun },
+    { name: "StateFuncVsClass", component: StateFuncVsClass },
     { name: "UseEffect", component: UseEffect },
     { name: "FunVsClass", component: FunVsClass },
     { name: "ClosureTrap", component: ClosureTrap },
+    { name: "DidMountState", component: DidMountState },
+    { name: "EffectCase", component: EffectCase },
   ];
   return (
     <div className="container">
       <ul className="leftBar">
         {routerObj.map((item) => (
           <li key={item.name}>
-            <Link to={`/${item.name.toLowerCase()}`}>{item.name}</Link>
+            <NavLink
+              to={`/${item.name.toLowerCase()}`}
+              className={({ isActive }) =>
+                isActive ? "focusItem" : "focusItem"
+              }
+            >
+              {item.name}
+            </NavLink>
           </li>
         ))}
       </ul>

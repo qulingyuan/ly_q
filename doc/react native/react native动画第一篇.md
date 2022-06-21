@@ -167,3 +167,11 @@ const scrollY = useRef(new Animated.Value(0)).current;
 
 这篇文章主要是带大家入门React Native 自带的 `Animated` 动画库，学习和了解了简单动画的画法以及复杂动画的思想。不过大多数时候，我们会发现动画经常会有卡顿的问题，下一篇文章，我们主要探讨如何解决动画卡顿的问题，以及一些处理技巧。
 
+
+
+
+
+动画运行时，可以防止 `VirtualizedList` 组件渲染更多行。如果您需要在用户滚动列表时运行长动画或循环动画，您可以在动画配置中使用 `isInteraction: false` 来防止此问题。
+
+在使用 `rotateY`、`rotateX` 等变换样式时，请确保使用了变换样式 `perspective`。此时，如果没有它，某些动画可能无法在 Android 上呈现。
+
