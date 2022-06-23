@@ -84,9 +84,9 @@ function Article({ id }) {
 
 
 
+不要再 react 中直接使用匿名函数，最好将其赋值给一个变量后，使用那个变量，可以避免每次渲染都重复创建函数。
 
-
-
+Move out the `renderItem` function to the outside of render function, so it won't recreate itself each time render function called.
 
 
 

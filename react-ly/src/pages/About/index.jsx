@@ -6,9 +6,9 @@ import React, {
   useState,
   useImperativeHandle,
 } from "react";
-class Children extends Component {
-  render = () => <div>hello,world</div>;
-}
+// class Children extends Component {
+//   render = () => <div>hello,world</div>;
+// }
 /* TODO:  Ref属性是一个字符串 */
 // export default class About extends React.Component {
 //   componentDidMount() {
@@ -298,9 +298,18 @@ export default class Index extends React.Component {
   }
 
   render() {
+    var scope = "global scope";
+    function checkscope() {
+      var scope = "local scope";
+      function f() {
+        return scope;
+      }
+      return f();
+    }
+    checkscope();
     return (
       <div>
-        <div
+        {/* <div
           ref={(node) => {
             this.node = node;
             console.log("此时的参数是什么：", this.node);
@@ -310,7 +319,7 @@ export default class Index extends React.Component {
         </div>
         <button onClick={() => this.setState({ num: this.state.num + 1 })}>
           点击
-        </button>
+        </button> */}
       </div>
     );
   }
