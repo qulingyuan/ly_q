@@ -293,20 +293,11 @@ import React, {
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { num: 0 };
-    this.node = React.createRef();
+    this.state = { num: 0, name: "ling" };
+    // this.node = React.createRef();
   }
 
   render() {
-    var scope = "global scope";
-    function checkscope() {
-      var scope = "local scope";
-      function f() {
-        return scope;
-      }
-      return f();
-    }
-    checkscope();
     return (
       <div>
         {/* <div

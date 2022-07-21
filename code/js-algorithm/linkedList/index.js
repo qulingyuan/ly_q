@@ -1,21 +1,11 @@
-const a = { val: "a" };
-const b = { val: "b" };
-const c = { val: "c" };
-const d = { val: "d" };
-//创建链表
-a.next = b;
-b.next = c;
-c.next = d;
-
-//遍历链表
-let p = a;
-while (p) {
-  console.log(p.val);
-  p = p.next;
+//链表节点定义
+function ListNode(val, next) {
+  this.val = val === undefined ? 0 : val;
+  this.next = next === undefined ? null : next;
 }
-//插入
-const e = { val: "e" };
-c.next = e;
-e.next = d;
-//删除
-c.next = d;
+//创建链表函数
+function buildLinkList(values) {
+  return values.reverse().reduce((pre, cur) => new ListNode(cur, pre), null);
+}
+
+const linkedList = buildLinkList([1, 2, 3, 4, 5, 6]);
