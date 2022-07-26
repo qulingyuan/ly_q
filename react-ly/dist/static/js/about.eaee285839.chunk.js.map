@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/about.eaee285839.chunk.js","mappings":"kKAEe,SAASA,IACtB,OAAO","sources":["webpack://react-ly/./src/pages/About/index.jsx"],"sourcesContent":["import React from \"react\";\n\nexport default function About() {\n  return <h1>About~~</h1>;\n}\n"],"names":["About"],"sourceRoot":""}
