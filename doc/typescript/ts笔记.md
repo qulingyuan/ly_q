@@ -25,3 +25,4 @@ const greaterThan2: number = <number>arrayNumber.find(num => num > 2);
 any 和 unknown 这两个特殊类型属于万金油，因为它们既可以被断言成任何类型，反过来任何类型也都可以被断言成 any 或 unknown。
 
 建议使用类型首尾来替代非空断言`!.`。
+
