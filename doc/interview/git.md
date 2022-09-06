@@ -66,3 +66,6 @@ git log --graph  # 查看
 git log --n2  # 只查看最近的两次commit
 ```
 
+## git
+
+有时候，git 的语言莫名会变成中文，想要切换成英文，在`.zshrc`文件中添加`export LC_ALL=en_US.UTF-8`即可。
