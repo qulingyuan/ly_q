@@ -36,7 +36,7 @@ module.exports = {
 
 新建一个`public/index.html`，上面 `template`的意思是以该 html 作为模板，即在打包的时候，会将这个 html 文件赋值到 `output` 目录，并自动注入打包好的脚本文件，我们就不需要手动创建 html了。
 
-注意到，我们在`output`属性下添加 `clean: true`，表示在生成文件之前清空 output 目录，这是 `v5.20+`的新特性。
+在`output`属性下添加 `clean: true`，表示在生成文件之前清空 output 目录，这是 `v5.20+`的新特性。
 
 ## webpack-dev-server
 
