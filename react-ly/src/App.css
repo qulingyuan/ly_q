@@ -11,6 +11,7 @@
   flex: 1;
   border-left: 1px solid #010812;
   margin-left: 20px;
+  padding-left: 20px;
 }
 
 .focusItem {
