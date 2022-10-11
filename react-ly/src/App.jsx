@@ -9,7 +9,8 @@ import FunVsClass from "./pages/FunVsClass/index";
 import ClosureTrap from "./pages/ClosureTrap";
 import DidMountState from "./pages/LifeCycle/DidMountState";
 import EffectCase from "./pages/LifeCycle/EffectCase";
-import Context from "./pages/Context/Func/index";
+import Context from "./pages/Context/index";
+import ContextDemo1 from "./pages/Context/demo1";
 const Home = lazy(() => import(/* webpackChunkName: 'home'*/ "./pages/Home")); //给 chunk 包起名字
 const About = lazy(() =>
   import(/* webpackChunkName: 'about'*/ "./pages/About")
@@ -26,6 +27,7 @@ function App() {
     { name: "DidMountState", component: DidMountState },
     { name: "EffectCase", component: EffectCase },
     { name: "Context", component: Context },
+    { name: "ContextDemo1", component: ContextDemo1 },
   ];
   return (
     <div className="container">

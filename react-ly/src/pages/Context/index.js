@@ -10,7 +10,6 @@ function One() {
         <div className="one">
           <h1>One</h1>
           <Two></Two>
-          {/* <Six /> */}
         </div>
       </Context.Provider>
       <button
@@ -24,10 +23,7 @@ function One() {
     </>
   );
 }
-// function Six() {
-//   console.log("Six");
-//   return <Two />;
-// }
+
 function Two() {
   console.log("Two渲染了");
   return (
@@ -49,6 +45,7 @@ function Three() {
     <div className="three">
       <h1>Three</h1>
       <p>{ctx}</p>
+      <Six />
     </div>
   );
 }
@@ -81,5 +78,8 @@ class Five extends Component {
     );
   }
 }
-
+function Six() {
+  console.log("Six渲染了");
+  return <h1>Six</h1>;
+}
 export default One;
