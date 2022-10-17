@@ -2,27 +2,33 @@
 
 盒模型由四个部分组成：
 
-- 外边框边界 `margin`
-- 边框边界 `border`
+- 外边距 `margin`
+- 边框 `border`
 
-- 内边距边界 `padding`
+- 内边距 `padding`
 
-- 内容边界 `content`
+- 内容 `content`
 
 盒模型有两种类型：
 
-- IE盒模型(`border-box`)：`width = content + padding + border`。
-- 标准盒模型(`content-box`)：`width = content`。
+- IE盒模型(`border-box`)：`width = content + padding + border`，高度同理。
+- 标准盒模型(`content-box`)：设置 `width` 和 `height`，实际设置的是`content`。
 
-使用`box-sizing`来指定`border-box`或`content-box`。
+`box-sizing`设为`border-box`或`content-box`分别指定IE 盒模型和标准盒模型。
 
 ## 内联元素vs块状元素
 
-浏览器中，元素有两种：
+浏览器中，元素主要分为块级元素和内联元素，通过设置`display`属性为`block`和`inline`控制盒子的类型。
 
-- 内联元素(`display:inline` )：又称行内元素。与其他内联元素位于同一行，且宽高设置无效，默认的宽度就是文字的宽度。垂直方向的内外边距设置无效，不可容纳块级元素。如：`img、span、a、button、input`。
-
-- 块级元素(`display:block`)：独占一行，未设置宽度时，宽度为父容器的100%。宽高、内外边距设置有效。如：`div、p、h1、ul`。
+- 内联元素(`display:inline` )：又称行内元素，如`img、span、a、button、input`。
+  1. 与其他内联元素位于同一行，不会产生换行。
+  2. `width`、`height` 属性设置无效，宽度由内容的宽度决定。
+  3. 垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 `inline` 状态的盒子推开。水平方向正常 。
+  4. 不可容纳块级元素。
+- 块级元素(`display:block`)：如`div、p、h1、ul`。
+  1. 独占一行，未设置宽度时，宽度为父容器的100%。
+  2. 宽高、内外边距边框设置有效。
+  3. 
 - 内联块级元素(`display:inline-block`)：宽高、内外边距设置有效，可位于块级元素或内联元素内，可容纳块级元素。
 
 ## 文档流和元素定位
@@ -30,13 +36,11 @@
 正常的文档流在 HTML 里面为从上到下，从左到右的排版布局。
 `position`可以调整元素定位。
 
-`static`：默认值，元素忽略 `top/bottom/left/right` 或者 `z-index` 声明。
+- `static`：默认值，元素忽略 `top/bottom/left/right` 或者 `z-index` 声明。
+- `relative`：相对定位，元素保持原有文档流，但相对本身的原始位置发生位移，且会占有原始位置的空间。后一个元素默认排列到其原始位置的后面。`relative`元素可以溢出父元素，使用`overflow:hidden`可以隐藏溢出部分。
+- `absolute`：绝对定位，元素脱离文档流，不占有原始空间，相对非 `static` 父元素绝对定位，后一个元素默认排列到前一个元素后面。
 
-`relative`：相对定位，元素保持原有文档流，但相对本身的原始位置发生位移，且会占有原始位置的空间。后一个元素默认排列到其原始位置的后面。`relative`元素可以溢出父元素，使用`overflow:hidden`可以隐藏溢出部分。
-
-`absolute`：绝对定位，元素脱离文档流，不占有原始空间，相对非 `static` 父元素绝对定位，后一个元素默认排列到前一个元素后面。
-
-`fixed`：绝对定位，与`absolute`定位相同，但相对浏览器窗口进行绝对定位。
+- `fixed`：绝对定位，与`absolute`定位相同，但相对浏览器窗口进行绝对定位。
 
 ## 元素堆叠 z-index
 
