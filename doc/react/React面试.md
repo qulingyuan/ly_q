@@ -4,6 +4,14 @@ JSX 是 JavaScript 的一种语法扩展，它和模板语言很接近，充分�
 
 `ReactElement` 对象实例，本质上是以 JavaScript 对象形式存在的对DOM的描述，即**虚拟DOM**(的一个节点)。虚拟DOM通过`ReactDOM.render(element,container,[callback])`渲染成真实DOM。
 
+**An element is a plain object \*describing\* a component instance or DOM node and its desired properties.** It contains only information about the component type (for example, a `Button`), its properties (for example, its `color`), and any child elements inside it.
+
+**An element describing a component is also an element, just like an element describing the DOM node. They can be nested and mixed with each other.**
+
+https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html
+
+https://zh-hans.reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html
+
 ## 生命周期
 
 #### 挂载阶段

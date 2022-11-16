@@ -1,6 +1,8 @@
+说明：由于是面试题，所以整理的尽量简短，有条理。
+
 ## 数据类型✅
 
-JavaScript 中共有七种内置类型，这些类型又分为基本类型和引用类型两大类。
+JavaScript 中共的数据类型分为基本类型和引用类型两大类。
 
 基本类型：`Null`，`Undefined`，`Boolean`，`Number`，`String`，`Symbol`，`bigInt`(ES10 新增)。
 
@@ -8,21 +10,19 @@ JavaScript 中共有七种内置类型，这些类型又分为基本类型和引
 
 ## 检测数据类型的方式
 
-1. ### typeof 操作符
+1. typeof 操作符
 
-检测原始数据类型，`typeof` 可以识别除 `null` 外的所有基本类型，引用类型除 `function` 外全部识别为 `Object`。未定义的变量 `typeof` 返回 `undefined`。
+检测原始数据类型，`typeof` 可以识别除 `null` 外的所有基本类型，null 被识别为`object`引用类型除 `function` 外全部识别为 `object`。未定义的变量 `typeof` 返回 `undefined`。
 
-2. ### instanceof
+2. instanceof
 
-`instanceof` 运算符用来判断构造函数的 `prototype` 属性是否出现在对象的原型链中的任何位置。`instanceof` 只能用来判断两个对象是否属于实例关系，但并不能判断一个对象实例具体属于哪种类型。
+`instanceof` 运算符用来判断构造函数的 `prototype` 属性是否出现在对象的**原型链中的任何位置**。`instanceof` 只能用来判断两个对象是否属于实例关系，但并不能判断一个对象实例具体属于哪种类型。
 
-3. ### constructor
+3. constructor
 
 undefined和 null 没有 constructor 属性，且 constructor 指向可以改变。
 
-4. ### Object.prototype.toString().call()
-
-
+4. Object.prototype.toString().call()
 
 ```javascript
 function _typeof(obj){
@@ -34,6 +34,92 @@ function _typeof(obj){
 _typeof([12,3,343]);
 "array"
 ```
+
+## null 和 undefined 区别
+
+`null` 和 `undefined` 都是基本数据类型。
+
+`undefined` 表示未定义，以及在变量声明但未初始化时相当于给变量赋值了 `undefined`。但在 JavaScript 中，`undefined` 只是一个变量，而不是关键字。为避免 `undefined` 被篡改，可使用 `void 0` 安全地获取 `undefined` 值。
+
+`null` 表示一个**空对象指针**。在定义将来要保存对象值的变量时，建议使用 `null` 来初始化。且`typeof null`结果是 `object`，这是因为 `null` 的类型标签和对象类型一样都是`000`，是历史遗留问题。
+
+## 0.1 + 0.2 !== 0.3
+
+计算机用二进制方式存储数据，0.1 和0.2 的二进制都是无限循环的数。js 中的number 类型用 double 双精度浮点数表示，小数部分最多 52 位，需要进行舍入。
+
+解决方式是利用 `Number.EPSILON`：该属性表示 1 与number可表示的大于 1 的最小的浮点数之间的差值。
+
+```javascript
+Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON
+```
+
+instanceof 原理
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 作用域✅
 
@@ -68,12 +154,6 @@ changeName();
 执行 `showName` 时，先从 `showName` 函数中查找是否存在局部变量 `name`，如果没有，则根据书写的位置，在上一层作用域内查找，在这个例子中，就是全局作用域，所以输出为 `lingyuan`。
 
 如果是动态作用域，则上面代码会输出 `lingyuan`。
-
-LSH和 RSH 是引擎执行代码时**查询变量**的两种方式。
-
-LSH：变量出现在赋值操作左侧时，意味着变量赋值或写入内存
-
-RSH：变量出现在赋值操作右侧时，意味着变量查找或从内存中读取。
 
 ## 执行上下文
 
@@ -284,13 +364,7 @@ localStorage
 
 [垃圾回收](https://segmentfault.com/a/1190000006104910)
 
-## null 和 undefined 区别
 
-`null` 和 `undefined` 都是基本数据类型。
-
-`undefined` 表示未定义，还有在变量声明但未初始化时相当于给变量赋值了 `undefined`。但在 JavaScript 中，`undefined` 只是一个变量，而不是关键字。为避免 `undefined` 被篡改，可使用 `void 0` 安全地获取 `undefined` 值。
-
-`null` 表示一个**空对象指针**。在定义将来要保存对象值的变量时，建议使用 `null` 来初始化。
 
 ## 浮点数精度计算
 

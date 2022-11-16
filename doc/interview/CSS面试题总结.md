@@ -12,13 +12,13 @@
 盒模型有两种类型：
 
 - IE盒模型(`border-box`)：`width = content + padding + border`，高度同理。
-- 标准盒模型(`content-box`)：设置 `width` 和 `height`，实际设置的是`content`。
+- 标准盒模型(`content-box`)：设置 `width` 和 `height`，实际设置的是`content`的宽高。
 
 `box-sizing`设为`border-box`或`content-box`分别指定IE 盒模型和标准盒模型。
 
 ## 内联元素vs块状元素
 
-浏览器中，元素主要分为块级元素和内联元素，通过设置`display`属性为`block`和`inline`控制盒子的类型。
+浏览器中，元素主要分为块级元素和内联元素，通过设置`display`属性为`block`和`inline`可以控制盒子的类型。
 
 - 内联元素(`display:inline` )：又称行内元素，如`img、span、a、button、input`。
   1. 与其他内联元素位于同一行，不会产生换行。
